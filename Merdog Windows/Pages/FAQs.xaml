@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="Merdog_Windows.Pages.FAQs"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer Margin="20,20,20,20" HorizontalScrollBarVisibility="Auto" 
+                  VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <Button Name="BackButton" Style="{StaticResource NavigationBackButtonNormalStyle}" Click="BackButton_Click" >
+            </Button>
+            <TextBlock FontSize="60">About关于</TextBlock>
+
+            <TextBlock Margin="10,10,0,10" FontFamily="Consolas" FontSize="20">作者:胡远韬</TextBlock>
+            <Button Name="LocalPDFButton" Click="LocalPDFButton_Click">语法手册</Button>
+            <HyperlinkButton NavigateUri="http://www.merdog.cn">官方网站(持续到2020 8月份,续命看零花钱够不够，反正github不会挂)</HyperlinkButton>
+            <HyperlinkButton NavigateUri="http://www.github.com/HttoHu/Merdog">Gihub</HyperlinkButton>
+            <TextBlock FontFamily="Consolas" Margin="0,10,0,0" FontSize="15" FontStretch="ExtraCondensed">12-29 这个版本修复了刷漆的一些bug，</TextBlock>
+
+            <TextBlock FontFamily="Consolas" Margin="0,10,0,0" FontSize="15" FontStretch="ExtraCondensed">发现bug请联系Huyuantao@outlook.com 非常感谢</TextBlock>
+            <TextBlock FontFamily="Consolas" Margin="0,10,0,0" FontSize="15" FontStretch="ExtraCondensed">Merdog 版本号: Snake 1.3</TextBlock>
+            <TextBlock FontFamily="Consolas" Margin="0,10,0,0" FontSize="45" FontStretch="ExtraCondensed">F1:刷漆（慢速度）</TextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

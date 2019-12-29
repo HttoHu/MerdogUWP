@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>5701a13d-1bb8-4e0a-9691-59d575dbbed0</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="interpreter\include\clib\any.hpp" />
+    <ClInclude Include="interpreter\include\clib\containers.hpp" />
+    <ClInclude Include="interpreter\include\clib\maths.hpp" />
+    <ClInclude Include="interpreter\include\clib\merdog_io.hpp" />
+    <ClInclude Include="interpreter\include\clib\utility.hpp" />
+    <ClInclude Include="interpreter\include\any.hpp" />
+    <ClInclude Include="interpreter\include\basic_objects.hpp" />
+    <ClInclude Include="interpreter\include\branch_and_loop.hpp" />
+    <ClInclude Include="interpreter\include\compound_box.hpp" />
+    <ClInclude Include="interpreter\include\environment.hpp" />
+    <ClInclude Include="interpreter\include\error.hpp" />
+    <ClInclude Include="interpreter\include\expr.hpp" />
+    <ClInclude Include="interpreter\include\function.hpp" />
+    <ClInclude Include="interpreter\include\instructions.hpp" />
+    <ClInclude Include="interpreter\include\lexer.hpp" />
+    <ClInclude Include="interpreter\include\memory.hpp" />
+    <ClInclude Include="interpreter\include\namespace.hpp" />
+    <ClInclude Include="interpreter\include\optimizer.hpp" />
+    <ClInclude Include="interpreter\include\parser.hpp" />
+    <ClInclude Include="interpreter\include\parser_node.hpp" />
+    <ClInclude Include="interpreter\include\type.hpp" />
+    <ClInclude Include="interpreter\include\value.hpp" />
+    <ClInclude Include="interpreter\include\word_record.hpp" />
+    <ClInclude Include="merdog_runner.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="interpreter\include\clib\basic_algorithm.hpp" />
+    <ClInclude Include="interpreter\include\clib\dictionary.hpp" />
+    <ClInclude Include="interpreter\include\clib\sys_method.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="interpreter\source\basic_objects.cpp" />
+    <ClCompile Include="interpreter\source\branch_and_loop.cpp" />
+    <ClCompile Include="interpreter\source\compound_box.cpp" />
+    <ClCompile Include="interpreter\source\containers.cpp" />
+    <ClCompile Include="interpreter\source\environment.cpp" />
+    <ClCompile Include="interpreter\source\error.cpp" />
+    <ClCompile Include="interpreter\source\expr.cpp" />
+    <ClCompile Include="interpreter\source\function.cpp" />
+    <ClCompile Include="interpreter\source\lexer.cpp" />
+    <ClCompile Include="interpreter\source\memory.cpp" />
+    <ClCompile Include="interpreter\source\merdog_io.cpp" />
+    <ClCompile Include="interpreter\source\namespace.cpp" />
+    <ClCompile Include="interpreter\source\optimizer.cpp" />
+    <ClCompile Include="interpreter\source\parser.cpp" />
+    <ClCompile Include="interpreter\source\type.cpp" />
+    <ClCompile Include="interpreter\source\utility.cpp" />
+    <ClCompile Include="interpreter\source\value.cpp" />
+    <ClCompile Include="interpreter\source\word_record.cpp" />
+    <ClCompile Include="merdog_runner.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="interpreter\source\maths.cpp" />
+    <ClCompile Include="interpreter\source\dictionary.cpp" />
+  </ItemGroup>
+</Project>
