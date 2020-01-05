@@ -12,6 +12,12 @@
 
 namespace Mer
 {
+	void Mem::swap(Object rhs, Object lhs)
+	{
+		auto tmp = rhs->clone();
+		rhs->operator=(lhs);
+		lhs->operator=(tmp);
+	}
 	std::string Mem::type_to_string(BasicType bt)
 	{
 		std::string ret;
@@ -234,7 +240,7 @@ namespace Mer
 		{
 			throw std::runtime_error("array overflow!");
 		}
-		return mem[pos + i + 1];
+		return mem[pos + i + 1+mem.get_current()];
 	}
 
 	Mem::Object Mem::Array::clone() const
@@ -258,4 +264,20 @@ namespace Mer
 		}
 		return std::make_shared<InitListObj>(std::move(vec), type_code);
 	}
+
+	Mem::Object Mer::Mem::GArray::operator[](Object index)
+	{
+		int i = Mem::get_raw<int>(index);
+		if (i >= length)
+		{
+			throw std::overflow_error("array overflow!");
+		}
+		return mem[pos + i + 1u];
+	}
+
+	Mem::Object Mem::GArray::clone() const
+	{
+		return std::make_shared<GArray>(type, pos, length);
+	}
+
 }

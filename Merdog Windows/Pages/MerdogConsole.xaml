@@ -15,6 +15,7 @@
             <StackPanel Margin="10,10,10,10" Height="50" Orientation="Horizontal">
                 <Button Name="BackButton" Style="{StaticResource NavigationBackButtonNormalStyle}" Click="BackButton_Click" ></Button>
                 <Button Margin="20,0,0,0" Name="Clear"  Click="Clear_Click">Clear All</Button>
+                <Button Margin="20,0,0,0" Name="Copy" Click="Copy_Click" x:Uid="CopyConsoleText"></Button>
             </StackPanel>
 
             <TextBlock  Margin="20,20,20,20" FontFamily="Consolas" TextWrapping="Wrap" Name="DisPlayBox"  ></TextBlock>

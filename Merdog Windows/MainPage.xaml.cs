@@ -126,7 +126,7 @@ namespace Merdog_Windows
             {
                 showInformation("Error", "open filed failed");
             }
-            PaintText();
+            //PaintText();
         }
         private void Open_Click(object sender, RoutedEventArgs e)
         {

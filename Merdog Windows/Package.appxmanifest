@@ -9,7 +9,7 @@
   <Identity
     Name="46398Htto.Merdog"
     Publisher="CN=C43D10DB-27B3-4253-9DA2-C5440BC49448"
-    Version="1.2.7.0" />
+    Version="1.2.8.0" />
 
   <mp:PhoneIdentity PhoneProductId="555d43c7-1956-4c4b-a2d6-430484498e82" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -39,11 +39,15 @@
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape"/>
+          <uap:Rotation Preference="portrait"/>
+          <uap:Rotation Preference="landscapeFlipped"/>
+          <uap:Rotation Preference="portraitFlipped"/></uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>
 
   <Capabilities>
-    <Capability Name="internetClient" />
-  </Capabilities>
+    <uap:Capability Name="removableStorage"/></Capabilities>
 </Package>

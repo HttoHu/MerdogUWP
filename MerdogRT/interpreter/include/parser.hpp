@@ -33,17 +33,17 @@ namespace Mer
 
 	struct WordRecorder;
 	class Expr;
-	class Program:public ParserNode
+	class Program :public ParserNode
 	{
 	public:
-		Program(Token *id):identify(id) {}
+		Program(Token* id) :identify(id) {}
 		Mem::Object execute()override;
 		std::string to_string()override;
 		std::vector<UptrPNode> stmts;
 		size_t* pc = new size_t(0);
 		~Program() { delete pc; }
 		size_t off = 0;
-		Token *identify;
+		Token* identify;
 	};
 	class NamePart
 	{
@@ -54,13 +54,14 @@ namespace Mer
 		bool is_auto_array() { return auto_array; }
 		bool is_pointer() { return pointer; }
 		Token* get_id() { return id; }
+		std::vector<size_t> array_indexs;
 	private:
 		Token* id;
 		// int a[]={1,2,3};
-		bool auto_array=false;
+		bool auto_array = false;
 		bool arr = false;
 		bool pointer = false;
-		size_t count=1;
+		size_t count = 1;
 	};
 	class VarDeclUnit
 	{
@@ -70,15 +71,18 @@ namespace Mer
 		Token* get_id() { return id; }
 		size_t& get_size() { return size; }
 		bool arr() { return is_arr; }
-		bool pointer() { return is_p; }
+		bool pointer() { return is_p; }		
+		std::vector<size_t> array_indexs;
 	private:
+
 		bool is_arr = false;
 		bool is_p = false;
-		size_t size=1;
+		size_t size = 1;
 		type_code_index type_code;
 		Token* id;
 		ParserNode* expr;
 	};
+	//create local variable
 	class LocalVarDecl :public ParserNode
 	{
 	public:
@@ -90,10 +94,11 @@ namespace Mer
 	private:
 		void process_unit(VarDeclUnit* a, size_t c_pos);
 		type_code_index pos;
-		type_code_index sum=0;
+		type_code_index sum = 0;
 		std::vector<UptrPNode> exprs;
 		type_code_index type;
 	};
+	//create global variable
 	class GloVarDecl :public ParserNode
 	{
 	public:
@@ -101,8 +106,8 @@ namespace Mer
 		Mem::Object execute()override;
 	private:
 		void process_unit(VarDeclUnit* a, size_t c_pos);
-		type_code_index pos=0;
-		int sum=0;
+		type_code_index pos = 0;
+		int sum = 0;
 		std::vector<UptrPNode> exprs;
 		type_code_index type;
 	};
@@ -114,7 +119,7 @@ namespace Mer
 		Cast(ParserNode* _expr, type_code_index type) :expr(_expr), to_type(type) {}
 		Mem::Object execute()override;
 		type_code_index get_type()override { return to_type; }
-		~Cast(){ delete expr; }
+		~Cast() { delete expr; }
 	private:
 		ParserNode* expr;
 		type_code_index to_type;
@@ -145,13 +150,28 @@ namespace Mer
 	private:
 		Mem::Object obj;
 	};
+	struct ArrayInitList {
+		ArrayInitList(const std::vector<ParserNode*> _leaves);
+		ArrayInitList(const std::vector<ArrayInitList*> _children);
+		std::vector<ArrayInitList*> children;
+		std::vector<ParserNode*> leaves;
+		~ArrayInitList() {
+			for (auto a : children)
+				delete a;
+		}
+		bool leaves_parent() { return leaves.size() != 0; }
+		size_t size() { if (leaves_parent())return leaves.size(); return children.size(); }
+	};
 	namespace Parser
 	{
+		std::pair<std::vector<size_t> ,std::vector<ParserNode*>> linearized_array();
+		// DFS 
+		ArrayInitList* build_array_initlist_tree();
 		std::unique_ptr<Program> program();
-		ParserNode *statement();
-		ParserNode *var_decl();
+		ParserNode* statement();
+		ParserNode* var_decl();
 		type_code_index get_type();
 		ParserNode* make_var();
-		WordRecorder *get_current_info();
+		WordRecorder* get_current_info();
 	}
 }

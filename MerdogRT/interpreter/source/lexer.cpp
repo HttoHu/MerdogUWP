@@ -15,7 +15,7 @@ TagStrMap	Mer::TagStr{
 	{ ID,"ID" },{ INTEGER,"INTEGER" },{ REAL,"REAL" } ,{ FUNCTION,"FUNCTION" },{ RETURN,"RETURN" },
 	{ IF,"IF" },{ ELSE_IF,"ELSE_IF" },{ ELSE,"ELSE" },{ WHILE,"WHILE" },{ DO,"DO" } ,{ FOR,"FOR" },{ BREAK,"BREAK" },{ CONTINUE,"CONTINUE" },{SWITCH,"SWITCH"},
 	{ INTEGER_DECL,"INTEGER_DECL" },{ REAL_DECL,"REAL_DECL" },{ STRING_DECL,"STRING_DECL" },{ BOOL_DECL,"BOOL_DECL" },{ VOID_DECL,"VOID_DECL" },{CHAR_DECL,"CHAR_DECL"},
-	{ PLUS,"PLUS" },{ MINUS,"MINUS" },{ MUL,"MUL" },{ DIV,"DIV" },{MAKE,"MAKE"},
+	{ PLUS,"PLUS" },{ MINUS,"MINUS" },{ MUL,"MUL" },{ DIV,"DIV" },{MAKE,"make"},
 	{ GE,"GE" },{ GT,"GT" },{ LE,"LE" },{ LT,"LT" },{ EQ,"EQ" },{ NE,"NE" },
 	{ AND,"AND" },{ OR,"OR" },{ NOT,"NOT" },{ GET_ADD,"GET_ADD" },
 	{ LPAREN,"LPAREN" },{ RPAREN,"RPAREN" },{ LSB,"LSB" },{ RSB,"RSB" },
@@ -80,6 +80,9 @@ void Mer::preprocess(const std::string& str, size_t& pos)
 	{
 		do
 		{
+			if (str[pos] == '\n'||str[pos]=='\r') {
+				token_stream.push_back(new Endl());
+			}
 			input_buf += str[pos++];
 		} while (str[pos] != '$');
 	}
@@ -89,7 +92,9 @@ void Mer::preprocess(const std::string& str, size_t& pos)
 	std::string end_ins = retrive_word(str, pos);
 	if (end_ins != "end")
 		throw LexerError("illegal terminal word of end preprocess "+end_ins);
-	my_stringsteam.str(input_buf);
+	my_stringstream.str(input_buf);
+	// back to the last char in case of the lexer eating \n or \r which may lead to the wrong line number.
+	pos--;
 }
 
 Token* Mer::parse_number(const std::string& str, size_t& pos)
@@ -278,10 +283,12 @@ void Mer::build_token_stream(const std::string& content) {
 		case '/':
 			if (i + 1 < content.size() && content[i + 1] == '/')
 			{
-				while (i + 1 < content.size() && content[i++] != '\n')
+				while (i + 1 < content.size() && content[i]!='\r'&&content[i] != '\n')
+				{
+					i++;
 					continue;
-				// in case that the uncorrect of line no
-				i -= 2;
+				}
+				token_stream.push_back(new Endl());
 				break;
 			}
 			else if (i + 1 < content.size() && content[i + 1] == '*')
@@ -289,7 +296,7 @@ void Mer::build_token_stream(const std::string& content) {
 				i += 2;
 				while (i < content.size())
 				{
-					if (content[i] == '\n')
+					if (content[i] == '\n'||content[i]=='\r')
 					{
 						token_stream.push_back(new Endl());
 					}
@@ -298,7 +305,9 @@ void Mer::build_token_stream(const std::string& content) {
 					{
 						i++;
 						if (i < content.size() && content[i] == '/')
+						{
 							break;
+						}
 					}
 				}
 				break;

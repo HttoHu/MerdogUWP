@@ -134,7 +134,7 @@ namespace Mer
 		type_code_index get_type()override;
 		std::string to_string()override;
 		ParserNode* clone()override {
-			return new BinOp(left->clone(), op, right->clone());
+			return new BinOp(left->clone(), op_tok, right->clone());
 		}
 		~BinOp()
 		{
@@ -142,8 +142,9 @@ namespace Mer
 			delete right;
 		}
 	private:
+		Token* op_tok;
 		ParserNode* left;
-		Token *op;
+		Mem::Object(*op)(const Mem::Object&, const Mem::Object&);
 		ParserNode* right;
 	};
 	class UnaryOp :public ParserNode
@@ -225,6 +226,7 @@ namespace Mer
 	class InitList:public ParserNode
 	{
 	public:
+		InitList() {}
 		InitList(type_code_index);
 		// if sz is -1, the size will get from init_v.size();
 		InitList(type_code_index t,int sz);
@@ -237,11 +239,11 @@ namespace Mer
 		}
 		int get_ele_count() { return size; }
 		ParserNode* clone()override;
+		type_code_index type = 0;		
+		int size = 0;
 	private:
-		InitList() {}
 		std::vector<ParserNode*> init_v;
-		type_code_index type=0;
-		int size=0;
+
 	};
 	class GetAdd :public ParserNode
 	{

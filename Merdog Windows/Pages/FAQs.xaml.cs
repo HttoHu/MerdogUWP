@@ -41,5 +41,11 @@ namespace Merdog_Windows.Pages
             StorageFile file = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Resources\Merdog.pdf");
             await Windows.System.Launcher.LaunchFileAsync(file);
         }
+
+        private async void LocalPDFButton_en_Click(object sender, RoutedEventArgs e)
+        {
+            StorageFile file = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Resources\merdog_en.pdf");
+            await Windows.System.Launcher.LaunchFileAsync(file);
+        }
     }
 }

@@ -1,0 +1,5 @@
+ResourcePack=C:\Users\HuYua\source\repos\Merdog Windows\Merdog Windows\bin\ARM64\Release\Merdog Windows_1.2.8.0_language-en.msix
+ResourcePack=C:\Users\HuYua\source\repos\Merdog Windows\Merdog Windows\bin\ARM64\Release\Merdog Windows_1.2.8.0_scale-100.msix
+ResourcePack=C:\Users\HuYua\source\repos\Merdog Windows\Merdog Windows\bin\ARM64\Release\Merdog Windows_1.2.8.0_scale-125.msix
+ResourcePack=C:\Users\HuYua\source\repos\Merdog Windows\Merdog Windows\bin\ARM64\Release\Merdog Windows_1.2.8.0_scale-150.msix
+ResourcePack=C:\Users\HuYua\source\repos\Merdog Windows\Merdog Windows\bin\ARM64\Release\Merdog Windows_1.2.8.0_scale-400.msix

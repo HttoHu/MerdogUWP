@@ -28,7 +28,7 @@ int err_line;
 namespace Mer
 {
 	std::string input_buf = "";
-	std::stringstream my_stringsteam;
+	std::stringstream my_stringstream;
 	extern std::map<type_code_index, std::map<std::string, Mer::FunctionBase*>> member_function_table;
 	extern std::map<std::string, UStructure*> ustructure_map;
 	namespace Mem
@@ -73,7 +73,7 @@ namespace Mer
 				}
 			}
 			member_function_table.clear();
-			for (auto &a : ustructure_map)
+			for (auto& a : ustructure_map)
 			{
 				delete a.second;
 			}
@@ -103,7 +103,7 @@ namespace Mer
 		output_buff = "";
 		err_msg = "";
 		_merdog_init_();
-		
+
 		try
 		{
 			Mer::build_token_stream(file_content);
@@ -123,7 +123,7 @@ namespace Mer
 		{
 			auto ret = e.what();
 			err_msg += e.what();
-			err_line = e.err_line_no();
+			err_line = e.error_line_no();
 			token_stream.clear();
 			clear();
 			return ret;

@@ -54,6 +54,7 @@ namespace Mer
 
 		extern Namespace* this_namespace;
 		using Object = std::shared_ptr<Value>;
+		void swap(Object rhs, Object lhs);
 		class Value
 		{
 		public:
@@ -565,6 +566,19 @@ namespace Mer
 		{
 		public:
 			Array(type_code_index _type, int _pos, int _length) :type(_type), pos(_pos), length(_length) {}
+			Mem::Object operator[](Object index)override;
+			Mem::Object clone()const override;
+			type_code_index get_type()const override { return type; }
+		private:
+			// element type
+			type_code_index type;
+			int pos;
+			int length;
+		};
+		class GArray :public Value
+		{
+		public:
+			GArray(type_code_index _type, int _pos, int _length) :type(_type), pos(_pos), length(_length) {}
 			Mem::Object operator[](Object index)override;
 			Mem::Object clone()const override;
 			type_code_index get_type()const override { return type; }

@@ -41,7 +41,9 @@ namespace Mer
 			const std::string error_msg = "<line " + std::to_string(get_line_no()) + ">" + ems;
 			return error_msg + "\n";
 		}
-		virtual int err_line_no() { return get_line_no(); }
+		virtual int error_line_no() {
+			return get_line_no();
+		}
 	protected:
 		std::string ems;
 	};
@@ -50,7 +52,7 @@ namespace Mer
 	public:
 		LexerError(const std::string& str);
 		std::string what()override;
-		int err_line_no()override { return line_no; }
+		int error_line_no()override { return line_no; }
 	private:
 		int line_no=0;
 	};
